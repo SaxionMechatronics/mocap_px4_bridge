@@ -26,6 +26,12 @@ ament_target_dependencies(mocap_px4_bridge rclcpp px4_msgs geometry_msgs)
 
 install(TARGETS
   mocap_px4_bridge
-  DESTINATION lib/${PROJECT_NAME})
+  DESTINATION lib/${PROJECT_NAME}
+)
+
+install(DIRECTORY
+  launch
+  DESTINATION share/${PROJECT_NAME}/
+)
 
 ament_package()
