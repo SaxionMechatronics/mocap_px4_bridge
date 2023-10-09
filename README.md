@@ -1,5 +1,9 @@
 # Mocap-PX4 Bridge
 
+<p align="center">
+  <img src="./docs/px4-mocap-ros2.png" alt="block diagram"/>
+</p>
+
 This ROS 2 Package takes the Position and Orientation measurements from OptiTrack system and send them to PX4 through the [uXRCE-DDS](https://docs.px4.io/main/en/middleware/uxrce_dds.html) bridge between ROS 2 and PX4.
 
 > [!WARNING]  
