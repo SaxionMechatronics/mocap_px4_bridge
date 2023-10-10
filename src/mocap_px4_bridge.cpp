@@ -20,8 +20,17 @@ class MocapPX4Bridge : public rclcpp::Node
 {
 public:
 	MocapPX4Bridge() : Node("mocap_px4_bridge") {
-		poseSub = this->create_subscription<geometry_msgs::msg::PoseStamped>("/Robot_1/pose", 10, std::bind(&MocapPX4Bridge::poseCallback, this, _1));
-		odomPub = this->create_publisher<px4_msgs::msg::VehicleOdometry>("/fmu/in/vehicle_visual_odometry", 10);
+		this->declare_parameter("mocap_topic", "/Robot_1/pose");
+		this->declare_parameter("px4_topic", "/fmu/in/vehicle_visual_odometry");
+
+		const std::string mocap_topic = this->get_parameter("mocap_topic").as_string();
+		const std::string px4_topic = this->get_parameter("px4_topic").as_string();
+
+		RCLCPP_INFO(get_logger(), "mocap_topic: " + mocap_topic);
+		RCLCPP_INFO(get_logger(), "px4_topic:   " + px4_topic);
+
+		poseSub = this->create_subscription<geometry_msgs::msg::PoseStamped>(mocap_topic, 10, std::bind(&MocapPX4Bridge::poseCallback, this, _1));
+		odomPub = this->create_publisher<px4_msgs::msg::VehicleOdometry>(px4_topic, 10);
 	}
 
 private:
