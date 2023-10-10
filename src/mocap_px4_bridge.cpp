@@ -39,7 +39,7 @@ void MocapPX4Bridge::poseCallback(const geometry_msgs::msg::PoseStamped::UniqueP
 					poseMsg->pose.orientation.x, poseMsg->pose.orientation.y, poseMsg->pose.orientation.z);
 	px4_msgs::msg::VehicleOdometry odomMsg;
 
-	odomMsg.pose_frame = odomMsg.POSE_FRAME_NED;
+	odomMsg.pose_frame = odomMsg.POSE_FRAME_FRD;
 	odomMsg.timestamp = uint64_t(poseMsg->header.stamp.sec)*1000000 + uint64_t(poseMsg->header.stamp.nanosec)/1000;
 	odomMsg.timestamp_sample = odomMsg.timestamp;
 
