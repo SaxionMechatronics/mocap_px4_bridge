@@ -16,7 +16,33 @@ This package assumes that the OptiTrack system is broadcasting the position and 
 * World frame: X axis Forward, Y-axis Left, Z-axis Up (Again: Check that the OptiTrack 'Up axis' is the Z-axis, in Motive the default is Y-axis).
 * Body frame: X axis Forward, Y-axis Left, Z-axis Up.
 
-## Converting to PX4 reference frame convention
+## Getting started
+
+We will create a ROS 2 workspace in `~/ros2_ws`, clone the required packages, build, and run:
+
+```shell
+mkdir -p ~/ros2_ws/src/
+cd ~/ros2_ws/src/
+git clone https://github.com/ros-drivers/mocap_optitrack.git
+git clone https://github.com/SaxionMechatronics/mocap_px4_bridge.git
+git clone https://github.com/PX4/px4_msgs.git
+cd ~/ros2_ws
+colcon build --symlink-install
+source ~/ros2_ws/install/setup.sh
+ros2 launch mocap_px4_bridge run.launch.py 
+```
+
+## Changing the topics names
+
+By default:
+
+1. This package will read the Optitrack measurements from the topic `/Robot_1/pose` 
+2. Transforming its frame convention to be PX4 compatible 
+3. Publish the measurements to the topic `/fmu/in/vehicle_visual_odometry`
+
+To change the names of these topic, you need to edit the file `config/params.yaml`.
+
+## Transforming to PX4 reference frame convention
 
 Assuming that:
 
