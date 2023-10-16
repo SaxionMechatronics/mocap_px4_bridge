@@ -6,10 +6,12 @@
 
 This ROS 2 Package takes the Position and Orientation measurements from OptiTrack system and send them to PX4 through the [uXRCE-DDS](https://docs.px4.io/main/en/middleware/uxrce_dds.html) bridge between ROS 2 and PX4.
 
-> [!WARNING]  
-> Check that the OptiTrack 'Up axis' is the Z-axis, in Motive the default is Y-axis
+Please refer to [this document](./docs/PX4+Mocap+ROS2-Guide/Indoor%20Localization%20using%20OptiTrack%20and%20PX4_%20AeroSTREAM%20Workshop%20Guide.md) for a complete guidline of using PX4 with OptiTrack.
 
 ## Pre conditions
+
+> [!WARNING]  
+> Check that the OptiTrack 'Up axis' is the Z-axis, in Motive the default is Y-axis
 
 This package assumes that the OptiTrack system is broadcasting the position and orientation of the robot with the following reference frame convention:
 
