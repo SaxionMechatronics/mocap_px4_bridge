@@ -5,8 +5,6 @@ In this tutorial-like guidline we will explain how to use OptiTrack pose measure
 Contents
 ========
 
-
-*   [Contents](#IndoorLocalizationusingOptiTrackandPX4:AeroSTREAMWorkshopGuide-Contents)
 *   [Overview](#IndoorLocalizationusingOptiTrackandPX4:AeroSTREAMWorkshopGuide-Overview)
 *   [Installation/setup](#IndoorLocalizationusingOptiTrackandPX4:AeroSTREAMWorkshopGuide-Installation/setup)
     *   [Motive/OptiTrack setup](#IndoorLocalizationusingOptiTrackandPX4:AeroSTREAMWorkshopGuide-Motive/OptiTracksetup)
@@ -254,87 +252,16 @@ PX4 Setup
 
 Open [QGroundControl](https://docs.qgroundcontrol.com/master/en/getting_started/download_and_install.html) and connect the Pixhawk to your computer using a USB cable. Navigate to Vehicle Setup → Parameters, then:
 
-| 
-**Parameters**
-
- | 
-
-**Values**
-
- |
+|**Parameters** | **Values** |
 | --- | --- |
-| 
-
-`UXRCE_DDS_CFG`
-
- | 
-
-a desired port on your flight controller (eg. `TELEM 2`)
-
- |
-| 
-
-`ser_tel2_baud`
-
- | 
-
-`921600`
-
- |
-| 
-
-`EKF2_EV_CTRL`
-
- | 
-
-Select `horizontal position fusion`, `vertical vision fusion`, and `yaw fusion`.
-
- |
-| 
-
-`EKF2_HGT_REF`
-
- | 
-
-Set to `Vision` to use the vision as the reference source for altitude estimation.
-
- |
-| 
-
-`EKF2_EV_POS_X,Y,Z`
-
- | 
-
-For more accuracy: Set the position of the vision sensor (or MoCap markers) with respect to the robot's body frame.
-
- |
-| 
-
-`EKF2_GPS_CTRL`
-
- | 
-
-Disable GPS sensor fusion
-
- |
-| 
-
-`EKF2_BARO_CTRL`
-
- | 
-
-Disable Barometer sensor fusion
-
- |
-| 
-
-`EKF2_RNG_CTRL`
-
- | 
-
-Disable range finder sensor fusion
-
- |
+| `UXRCE_DDS_CFG`| a desired port on your flight controller (eg. `TELEM 2`)|
+| `ser_tel2_baud`| `921600`|
+| `EKF2_EV_CTRL` | Select `horizontal position fusion`, `vertical vision fusion`, and `yaw fusion`. |
+| `EKF2_HGT_REF` | Set to `Vision` to use the vision as the reference source for altitude estimation. |
+| `EKF2_EV_POS_X,Y,Z` | For more accuracy: Set the position of the vision sensor (or MoCap markers) with respect to the robot's body frame. |
+| `EKF2_GPS_CTRL`| Disable GPS sensor fusion|
+| `EKF2_BARO_CTRL`| Disable Barometer sensor fusion|
+| `EKF2_RNG_CTRL`| Disable range finder sensor fusion|
 
 Getting started
 ===============
