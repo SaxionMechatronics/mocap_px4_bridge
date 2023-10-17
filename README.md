@@ -39,8 +39,7 @@ ros2 launch mocap_px4_bridge run.launch.py
 By default:
 
 1. This package will read the Optitrack measurements from the topic `/Robot_1/pose` 
-2. Transforming its frame convention to be PX4 compatible 
-3. Publish the measurements to the topic `/fmu/in/vehicle_visual_odometry`
+2. Publish the measurements to the topic `/fmu/in/vehicle_visual_odometry`
 
 To change the names of these topic, you need to edit the file `config/params.yaml`.
 
