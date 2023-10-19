@@ -3,7 +3,7 @@
 In this tutorial-like guidline we will explain how to use OptiTrack pose measurements with PX4-powered drone using ROS 2.
 
 <p align="center">
-  <img src="./attachments/2876080129/block-diagram.png" alt="block diagram"/>
+  <img src="./attachments/block-diagram.png" alt="block diagram"/>
 </p>
 
 Contents
@@ -50,10 +50,10 @@ Motive/OptiTrack setup
 
 1.  Open the data-streaming pane: “View” → “Data Streaming Pane”
     
-    ![](attachments/2876080129/2876080159.png)
+    ![](attachments/2876080159.png)
 2.  Show the advanced options: Click “_···”_ at the top right of the data streaming pane and then click “Show Advanced”
     
-    ![](attachments/2876080129/2876080150.png)
+    ![](attachments/2876080150.png)
 3.  In the datastreaming pane:
     
     1.  Enable `Broadcast Frame Data`
@@ -66,7 +66,7 @@ Motive/OptiTrack setup
         
     5.  Take note of the `command port`, `data port`, and `multicast interface`. You will need those later on.
         
-        ![](attachments/2876080129/2876080153.png)
+        ![](attachments/2876080153.png)
 
 ### Creating a rigid body
 
@@ -78,14 +78,14 @@ Motive/OptiTrack setup
     
 4.  Right-click and select “Rigid Body” → “Create From Selected Markers”
     
-    ![](attachments/2876080129/2876080144.png)
+    ![](attachments/2876080144.png)
 
 5.  Open the properties pane by going to “View” → “Properties Pane”
     
-    ![](attachments/2876080129/2876080141.png)
+    ![](attachments/2876080141.png)
 6.  In the properties pane set the “Streaming ID” of the rigid body to a value from 1 to 9.
     
-    ![](attachments/2876080129/2876080138.png)
+    ![](attachments/2876080138.png)
 
 ROS 2 installation
 ------------------

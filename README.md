@@ -11,7 +11,7 @@ This ROS 2 Package takes the Position and Orientation measurements from OptiTrac
 Please refer to [this document](./docs/PX4+Mocap+ROS2-Guide/Indoor%20Localization%20using%20OptiTrack%20and%20PX4_%20AeroSTREAM%20Workshop%20Guide.md) for a complete guidline of using PX4 with OptiTrack.
 
 <p align="center">
-  <img src="./docs//PX4+Mocap+ROS2-Guide/attachments/2876080129/block-diagram.png" alt="Full block diagram"/>
+  <img src="./docs/PX4+Mocap+ROS2-Guide/attachments/block-diagram.png" alt="Full block diagram"/>
 </p>
 
 ## Pre conditions
