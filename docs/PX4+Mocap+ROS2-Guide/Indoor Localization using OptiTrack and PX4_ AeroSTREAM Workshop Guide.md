@@ -2,6 +2,10 @@
 
 In this tutorial-like guidline we will explain how to use OptiTrack pose measurements with PX4-powered drone using ROS 2.
 
+<p align="center">
+  <img src="./attachments/2876080129/block-diagram.png" alt="block diagram"/>
+</p>
+
 Contents
 ========
 
