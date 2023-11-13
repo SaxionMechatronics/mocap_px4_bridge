@@ -283,3 +283,11 @@ In another terminal, start the OptiTrack client and PX4 bridge
 ```bash
 ros2 launch mocap_px4_bridge run.launch.py
 ```
+
+Acknowledgment
+===============
+
+This training material was prepared and delivered as part of the Horizon Europe CSA project: AeroSTREAM (Grant Agreement number: 101071270).
+<p align="center">
+  <img src="./attachments/aerostream-logo.png" alt="aerostream-logo"/>
+</p>
