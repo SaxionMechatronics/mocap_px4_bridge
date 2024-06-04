@@ -191,7 +191,7 @@ cd ~/ros2_ws/src
 mkdir NatNet_SDK_4.0_ubuntu
 cd NatNet_SDK_4.0_ubuntu
 wget https://s3.amazonaws.com/naturalpoint/software/NatNetSDKLinux/ubuntu/NatNet_SDK_4.0_ubuntu.tar
-wget -O ~/ros2_ws/src/natnet_ros2/src/client.cpp git....
+wget -O ~/ros2_ws/src/natnet_ros2/src/client.cpp https://github.com/Zredy/mocap_px4_bridge/raw/master/docs/PX4+Mocap+ROS2-Guide/attachments/client.cpp
 ```
 
 4.  Extract the files and copy the necessary files to their locations
