@@ -23,8 +23,8 @@ public:
 		this->declare_parameter("mocap_topic", "/Robot_1/pose");
 		this->declare_parameter("px4_topic", "/fmu/in/vehicle_visual_odometry");
 
-		const std::string mocap_topic = this->get_parameter("mocap_topic").as_string();
-		const std::string px4_topic = this->get_parameter("px4_topic").as_string();
+		RCLCPP_INFO(get_logger(), std::string("mocap_topic: " + mocap_topic).c_str());
+		RCLCPP_INFO(get_logger(), std::string("px4_topic:   " + px4_topic).c_str());
 
 		RCLCPP_INFO(get_logger(), "mocap_topic: " + mocap_topic);
 		RCLCPP_INFO(get_logger(), "px4_topic:   " + px4_topic);
