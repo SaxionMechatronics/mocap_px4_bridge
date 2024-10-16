@@ -305,7 +305,7 @@ ros2 topic echo /fmu/out/vehicle_odometry
 Acknowledgment
 ===============
 
-This training material was prepared and delivered as part of the Horizon Europe CSA project: AeroSTREAM (Grant Agreement number: 101071270).
+This training material update results from short-term visits and collaboration between Saxion and UNIZG-FSB and was prepared and delivered as part of the Horizon Europe CSA project: AeroSTREAM (Grant Agreement number: 101071270)."
 <p align="center">
   <img src="./attachments/aerostream-logo.png" alt="aerostream-logo"/>
 </p>
