@@ -72,7 +72,7 @@ q_px4.z = - q_px4.z​
 
 ## Acknowledgment
 
-This training material was prepared and delivered as part of the Horizon Europe CSA project: AeroSTREAM (Grant Agreement number: 101071270).
+This training material update results from short-term visits and collaboration between Saxion and UNIZG-FSB and was prepared and delivered as part of the Horizon Europe CSA project: AeroSTREAM (Grant Agreement number: 101071270)
 
 <p align="center">
   <img src="./docs/PX4+Mocap+ROS2-Guide/attachments/aerostream-logo.png" alt="aerostream-logo"/>

@@ -35,9 +35,11 @@ The main components to use OptiTrack with PX4 are:
     
 *   **Micro XRCE-DDS Agent:** This handles communication between ROS 2 and PX4, it communicates to the Micro XRCE-DDS Client running in PX4.
     
-*   **mocap\_optitrack:** A ROS 2 package to receive data from OptiTrack
+*   **natnet\_ros2:** Integration of the NatNet SDK for Optitrack and ROS2
     
 *   **mocap\_px4\_bridge:** A ROS 2 package to convert incomming OptiTrack messages to messages that can be provided to PX4.
+
+**Note:** Documentation updated as of 04.06.2024. to represent the changes in drivers and to provide easier setup 
     
 
 Installation/setup
@@ -62,9 +64,7 @@ Motive/OptiTrack setup
         
     3.  Set `Up Axis` to `Z Up`
         
-    4.  Set `transmission` type to `multicast`
-        
-    5.  Take note of the `command port`, `data port`, and `multicast interface`. You will need those later on.
+    4.  Set `transmission` type to `multicast`, if the data is not received later, try setting to `unicast`
         
         ![](attachments/2876080153.png)
 
@@ -86,6 +86,7 @@ Motive/OptiTrack setup
 6.  In the properties pane set the “Streaming ID” of the rigid body to a value from 1 to 9.
     
     ![](attachments/2876080138.png)
+7.  Note the name of the rigid body used, it will be used later. For this demonstration it is set to `FSB_RigidBody`
 
 ROS 2 installation
 ------------------
@@ -174,17 +175,34 @@ ROS 2 Workspace setup
 mkdir -p ~/ros2_ws/src/
 ```
 
-2.  Clone the mocap\_optitrack, mocap\_px4\_bridge and px4\_msgs package to your workspace.
+2.  Clone the natnet\_ros2, mocap\_px4\_bridge and px4\_msgs package to your workspace.
     
 
 ```bash
 cd ~/ros2_ws/src/
-git clone https://github.com/ros-drivers/mocap_optitrack.git
+git clone https://github.com/Raphtor/natnet_ros2.git
 git clone https://github.com/SaxionMechatronics/mocap_px4_bridge.git
 git clone https://github.com/PX4/px4_msgs.git
 ```
 
-3.  Build
+3.  Download and configure the NatNet SDK
+```bash
+cd ~/ros2_ws/src
+mkdir NatNet_SDK_4.0_ubuntu
+cd NatNet_SDK_4.0_ubuntu
+wget https://s3.amazonaws.com/naturalpoint/software/NatNetSDKLinux/ubuntu/NatNet_SDK_4.0_ubuntu.tar
+wget -O ~/ros2_ws/src/natnet_ros2/src/client.cpp https://github.com/Zredy/mocap_px4_bridge/raw/master/docs/PX4+Mocap+ROS2-Guide/attachments/client.cpp
+```
+
+4.  Extract the files and copy the necessary files to their locations
+```bash
+tar -xvf NatNet_SDK_4.0_ubuntu.tar
+cd ~/ros2_ws/src
+cp NatNet_SDK_4.0_ubuntu/lib/libNatNet.so natnet_ros2/lib/ && cp NatNet_SDK_4.0_ubuntu/include/NatNet* natnet_ros2/include/natnet
+rm -rf NatNet_SDK_4.0_ubuntu*
+```
+
+5.  Build
     
 
 ```bash
@@ -192,7 +210,7 @@ cd ~/ros2_ws/
 colcon build --symlink-install
 ```
 
-4.  Source the packages
+6.  Source the packages
     
 
 ```bash
@@ -203,34 +221,18 @@ You need to do this in every new terminal you open, you can also automate this b
 
 ### Configuration
 
-Open the configuration mocap\_optitrack configuration file (`~/ros2_ws/src/mocap_optitrack/config/mocap.yaml`) in a text editor.
+Open the configuration mocap\_px4\_bridge configuration file (`~/ros2_ws/src/mocap_px4_bridge/config/params.yaml`) in a text editor.
 
-You can make the following changes:
-
-1.  By default, it will contain two rigid bodies, remove the second one, it is not needed right now.
+Here you can change the name of the rigid body to the one put into Motive
+To do so, change the `mocap_topic` line to suit your rigid body name,
+for example: `mocap_topic: /YOUR_RIGID_BODY/pose_stamped`
     
-2.  Set the `mutlicast_address`, `command_port,` and `data_port` to the same values as in Motive.
-    
-3.  Set the rigid body ID (in the example below it is 1) to the same value as in Motive.
-    
-
-```java
-#
-# Definition of all trackable objects
-# Identifier corresponds to Trackable ID set in Tracking Tools
-#
-mocap_node:
-    ros__parameters:
-        rigid_bodies:
-            1:  # This is the rigid body ID
-                pose: "Robot_1/pose"
-                pose2d: "Robot_1/ground_pose"
-                child_frame_id: "Robot_1/base_link"
-                parent_frame_id: "world"
-        optitrack_config:
-                multicast_address: "239.255.42.99"
-                command_port: 1510
-                data_port: 1511
+The default is `FSB_RigidBody`:
+```yaml
+/mocap_px4_bridge:
+  ros__parameters:
+    mocap_topic: /FSB_RigidBody/pose_stamped
+    px4_topic: /fmu/in/vehicle_visual_odometry
 ```
 
 Setup Micro XRCE-DDS Agent
@@ -272,22 +274,38 @@ Getting started
 
 On the PC that is connected to the network that is streaming the OptiTrack data.
 
+Note to source the file in any new terminal before executing the commands to come:
+```bash
+source ~/ros2_ws/install/setup.sh
+```
+
 In one terminal, start the Micro XRCE-Agent
 
 ```bash
 sudo MicroXRCEAgent serial --dev /dev/ttyUSB0 -b 921600
 ```
 
-In another terminal, start the OptiTrack client and PX4 bridge
+In the second terminal, start the NatNet Optitrack to ROS2 driver
+
+```bash
+ros2 run natnet client
+```
+
+In the third terminal, start the OptiTrack client and PX4 bridge
 
 ```bash
 ros2 launch mocap_px4_bridge run.launch.py
 ```
 
+If you want to monitor the data received by ROS2, in a new terminal run:
+```bash
+ros2 topic echo /fmu/out/vehicle_odometry
+```
+
 Acknowledgment
 ===============
 
-This training material was prepared and delivered as part of the Horizon Europe CSA project: AeroSTREAM (Grant Agreement number: 101071270).
+This training material update results from short-term visits and collaboration between Saxion and UNIZG-FSB and was prepared and delivered as part of the Horizon Europe CSA project: AeroSTREAM (Grant Agreement number: 101071270)."
 <p align="center">
   <img src="./attachments/aerostream-logo.png" alt="aerostream-logo"/>
 </p>
